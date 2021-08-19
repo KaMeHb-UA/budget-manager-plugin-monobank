@@ -2,7 +2,7 @@ import { currencyRates } from '../helpers/api.js';
 import Interval from '../helpers/interval.js';
 import iso4217 from '../helpers/iso4217.js';
 
-const methodInterval = 301000; // 5m1s
+const methodInterval = 3600000; // 1h
 
 const caller = new Interval(async () => {
     const rates = await currencyRates();
