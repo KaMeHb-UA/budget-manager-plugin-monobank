@@ -1,3 +1,5 @@
-import { utils } from 'iso4217';
+import currencies, { utils } from 'iso4217';
 
-export default utils.getByCode;
+export const { getByCode } = utils;
+
+export default code => currencies[code];
