@@ -27,7 +27,7 @@ export default class{
         if(this.#intervalRunning && this.#initialized) return this.#last;
         this.#intervalRunning = true;
         setTimeout(() => { this.#intervalRunning = false }, this.#interval);
-        this.#last = await this.#fn(...args);
+        this.#last = this.#fn(...args);
         this.#initialized = true;
         return this.#last;
     }
