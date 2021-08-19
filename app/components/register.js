@@ -4,6 +4,7 @@ export default () => ({
     id: 'monobank-' + accId,
     name: 'monobank',
     hooks: [
+        'balance',
         'currencies_rate',
         'currency_info',
     ],
