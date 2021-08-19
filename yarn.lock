@@ -6,3 +6,8 @@
   version "16.6.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.6.2.tgz#331b7b9f8621c638284787c5559423822fdffc50"
   integrity sha512-LSw8TZt12ZudbpHc6EkIyDM3nHVWKYrAvGy6EAJfNfjusbwnThqjqxUKKRwuV3iWYeW/LYMzNgaq3MaLffQ2xA==
+
+iso4217@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/iso4217/-/iso4217-0.2.0.tgz#139ce00ac0cf0d360e48b22215c797f016b2840d"
+  integrity sha1-E5zgCsDPDTYOSLIiFceX8BayhA0=
