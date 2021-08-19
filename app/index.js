@@ -2,9 +2,7 @@ import { createServer } from 'http';
 import { env } from 'process';
 import * as methods from './components/methods.js';
 
-const { PORT, API_TOKEN } = env;
-
-if(!API_TOKEN) throw new Error('API_TOKEN isn\'t specified');
+const { PORT } = env;
 
 const port = +(PORT || 3000);
 
