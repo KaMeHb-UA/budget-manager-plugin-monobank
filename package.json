@@ -1,0 +1,9 @@
+{
+    "private": true,
+    "scripts": {
+        "start": "node app/index.js"
+    },
+    "devDependencies": {
+        "@types/node": "^16.6.2"
+    }
+}
