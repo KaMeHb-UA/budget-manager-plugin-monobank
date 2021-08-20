@@ -26,9 +26,15 @@ export default class{
     async call(...args){
         if(this.#intervalRunning && this.#initialized) return this.#last;
         this.#intervalRunning = true;
-        setTimeout(() => { this.#intervalRunning = false }, this.#interval);
-        this.#last = this.#fn(...args);
         this.#initialized = true;
-        return this.#last;
+        this.#last = this.#fn(...args);
+        try{
+            const res = await this.#last;
+            setTimeout(() => { this.#intervalRunning = false }, this.#interval);
+            return res;
+        } catch(e){
+            this.#intervalRunning = false;
+            throw e;
+        }
     }
 }
