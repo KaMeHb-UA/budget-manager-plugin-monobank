@@ -8,28 +8,28 @@ const port = +(PORT || 3000);
 
 async function handle({ method: methodName, id, params }){
     const method = methods[methodName];
-    if(method){
-        try{
-            return {
-                result: await method(params),
-                id,
-            };
-        } catch(e){
-            return {
-                id,
-                error: {
-                    code: -32000,
-                    message: e.message,
-                },
-            }
-        }
-    } else return {
-        id,
-        error: {
-            code: -32601,
-            message: 'Method not found',
-        },
-    };
+    if(method) try{
+        return {
+            result: await method(params),
+            id,
+        };
+    } catch(e){
+        return {
+            id,
+            error: {
+                code: -32000,
+                message: e.message,
+            },
+        };
+    } else {
+        return {
+            id,
+            error: {
+                code: -32601,
+                message: 'Method not found',
+            },
+        };
+    }
 }
 
 createServer((req, res) => {
