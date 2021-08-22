@@ -1,8 +1,8 @@
 import { getByCode } from '../helpers/iso4217.js';
 
-export default code => {
+export default ({ code }) => {
     const info = getByCode(code);
-    if(!info) return null;
+    if(!info) throw new Error(`couldn't find currency with code ${code}`);
     return {
         name: info.Currency,
         symbol: info.Symbol,

@@ -6,7 +6,7 @@ export default async () => {
     const transactions = await txs();
     return transactions.map(tx => {
         const currencyCode = iso4217(tx.currencyCode).Code;
-        const divider = 10 ** currencyInfo(currencyCode).fraction;
+        const divider = 10 ** currencyInfo({ code: currencyCode }).fraction;
         return {
             description: tx.description,
             id: tx.id,

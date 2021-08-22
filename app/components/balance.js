@@ -8,7 +8,7 @@ export default async () => {
     const balances = [];
     for(const acc of info.accounts){
         const cc = iso4217(acc.currencyCode).Code;
-        const ci = currencyInfo(cc);
+        const ci = currencyInfo({ code: cc });
         balances.push({
             type: getType(acc),
             amount: acc.balance / 10 ** ci.fraction,
