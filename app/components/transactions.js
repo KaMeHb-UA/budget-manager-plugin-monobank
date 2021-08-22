@@ -1,11 +1,8 @@
 import { txs } from '../helpers/api.js';
-import Interval from '../helpers/interval.js';
 import iso4217 from '../helpers/iso4217.js';
 import currencyInfo from './currency_info.js';
 
-const requestInterval = 61000; // 1m1s
-
-const caller = new Interval(async () => {
+export default async () => {
     const transactions = await txs();
     return transactions.map(tx => {
         const currencyCode = iso4217(tx.currencyCode).Code;
@@ -23,6 +20,4 @@ const caller = new Interval(async () => {
             accountId: tx.account.id,
         };
     });
-}, requestInterval);
-
-export default () => caller.call();
+}

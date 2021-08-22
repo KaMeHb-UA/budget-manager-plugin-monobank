@@ -1,12 +1,9 @@
 import { getType } from '../helpers/account.js';
 import { personalInfo } from '../helpers/api.js';
-import Interval from '../helpers/interval.js';
 import iso4217 from '../helpers/iso4217.js';
 import currencyInfo from './currency_info.js';
 
-const requestInterval = 61000; // 1m1s
-
-const caller = new Interval(async () => {
+export default async () => {
     const info = await personalInfo();
     const balances = [];
     for(const acc of info.accounts){
@@ -20,6 +17,4 @@ const caller = new Interval(async () => {
         });
     }
     return balances;
-}, requestInterval);
-
-export default () => caller.call();
+}
