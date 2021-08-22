@@ -8,4 +8,4 @@ WORKDIR /
 
 RUN yarn --prod
 
-ENTRYPOINT [ "yarn", "start" ]
+ENTRYPOINT [ "node", "/app/index.js" ]
