@@ -16,6 +16,7 @@ const caller = new Interval(async () => {
             type: getType(acc),
             amount: acc.balance / 10 ** ci.fraction,
             currency: cc,
+            id: acc.id,
         });
     }
     return balances;
