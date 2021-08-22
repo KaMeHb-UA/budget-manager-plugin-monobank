@@ -19,5 +19,5 @@ export default async () => {
             mcc: tx.mcc,
             accountId: tx.account.id,
         };
-    });
+    }).reverse();
 }
