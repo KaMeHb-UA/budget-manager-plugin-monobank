@@ -11,6 +11,9 @@ async function api(method, data, token){
     return JSON.parse(await request(endpoint + method, data, token ? { 'X-Token': token } : {}))
 }
 
+// there may be 429 errors while getting txs so it's better to bufferrize last got txs
+const lastTxs = {};
+
 /**
  * @type {() => Promise<{id: string, time: number, description: string, mcc: number, originalMcc: number, amount: number, operationAmount: number, currencyCode: number, commissionRate: number, cashbackAmount: number, balance: number, hold: boolean, receiptId: string, account: {id: string, type: ReturnType<typeof getType>}}[]>}
  */
@@ -19,10 +22,22 @@ export const txs = new Interval(async () => {
     if(!accounts) personalInfo();
     const arr = await Promise.all(
         (await accounts).map(
-            acc => api(`personal/statement/${acc.id}/${(Math.floor(Date.now() / 1000) - 2678400)}`, null, token).then(txs => [
-                acc,
-                txs,
-            ])
+            async acc => {
+                try{
+                    const res = await api(`personal/statement/${acc.id}/${(Math.floor(Date.now() / 1000) - 2678400)}`, null, token);
+                    lastTxs[acc.id] = res;
+                    return [
+                        acc,
+                        res,
+                    ];
+                } catch(e){
+                    console.error(e.message);
+                    return [
+                        acc,
+                        lastTxs[acc.id] || [],
+                    ];
+                }
+            }
         )
     );
     for(const [account, txs] of arr) for(const tx of txs) res.push(Object.assign(tx, { account }));
